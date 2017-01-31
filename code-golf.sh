@@ -28,7 +28,10 @@ function test(runtime, file) {
         .then(() => runTest(runtime, file, "games/game-02.txt", "o", [2]))
         .then(() => runTest(runtime, file, "games/game-03.txt", "x", [2]))
         .then(() => runTest(runtime, file, "games/game-04.txt", "o", [5]))
-        .then(() => runTest(runtime, file, "games/game-05.txt", "x", [7, 3]))
+        .then(() => runTest(runtime, file, "games/game-05.txt", "x", [3, 7]))
+        .then(() => runTest(runtime, file, "games/game-06.txt", "o", [2]))
+        .then(() => runTest(runtime, file, "games/game-07.txt", "x", [1]))
+        .then(() => runTest(runtime, file, "games/game-08.txt", "x", [2]))
 }
 
 function runTest(runtime, file, inputFile, player, possibleOutput) {
@@ -58,6 +61,7 @@ function runTest(runtime, file, inputFile, player, possibleOutput) {
 
         node.stderr.on("data", (data) => {
             errors.push(data)
+            reject(errors.join("\n"))
         })
 
         node.stdin.write(input)
